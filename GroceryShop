@@ -1,0 +1,92 @@
+//--------------------------------------
+// Assignment (2)
+// Written by:(Zilu Mou 40176355)
+// For Comp 248 Section(PK-X)-Fall 2020
+//--------------------------------------
+
+import java.util.Scanner;
+// This program allows users to obtain the final price of grocery shopping
+// based on various factors such as the number of items purchased or whether one has membership or not.
+public class GroceryStore {
+
+	public static void main(String[] args) {
+		
+		Scanner grocery=new Scanner(System.in);
+		System.out.println("-------------------------------------");
+		System.out.println("  Welcome to the Grocery Calculator! ");
+		System.out.println("-------------------------------------");
+		
+		System.out.println("Please enter the quantities for each item on the list: ");
+		
+		int q1,q2,q3,q4,q5;
+		q1=grocery.nextInt();
+		q2=grocery.nextInt();
+		q3=grocery.nextInt();
+		q4=grocery.nextInt();
+		q5=grocery.nextInt();
+		
+		double fruit=(q1*26.99); // calculate the price based on the amount of items input
+		double cheese=(q2*22.99);// type is double since prices are not integers
+		double dairy=(q3*13.99);
+		double meat=(q4*56.99);
+		double seafood=(q5*38.99);
+		
+		double temtotal=fruit+cheese+dairy+meat+seafood;
+		double fintotal=temtotal-seafood; // temporary total for the discount calculation
+		
+		if(q1<0||q2<0||q3<0||q4<0||q5<0) {
+			System.out.println("Please enter a positive integer");
+			grocery.close();
+			return;
+		} // in case the user enters a negative number by mistake
+		
+		System.out.println("Do you have a membership? Please enter yes or no: ");
+		String line=grocery.next();
+		
+		
+		if(line.equalsIgnoreCase("yes")) { // if yes, then discount price and points are calculated
+			if(temtotal<250) {
+				
+				double total1=(temtotal-(fintotal * 0.1));
+				double points1=2 * total1;
+				System.out.println("The total price is "+total1+" $.");
+				System.out.println("You will receive "+Math.round(points1)+" points.");
+				System.out.println("Thanks for shopping! See you next time");
+			
+			}else {
+				
+				if(temtotal>=250 & temtotal<=500) { // if price is between 250 and 500 both included
+					                                // & is required here because both conditions need to be evaluated
+					double total2=(temtotal-(fintotal * 0.15));
+					double points2=(2 * temtotal);
+					System.out.println("The total price is "+total2+" $.");
+					System.out.println("You will receive "+Math.round(points2)+" points.");
+					System.out.println("Thanks for shopping! See you next time");
+				
+				}else {
+					
+					if(temtotal>500) {
+						
+						double total3=(temtotal-(fintotal * 0.2));
+						double points3=(3 * temtotal);
+						System.out.println("The total price is "+total3+" $.");
+						System.out.println("You will receive "+Math.round(points3)+" points.");
+						System.out.println("Thanks for shopping! See you next time");
+					
+					}
+				}
+		    }
+		}else { //if no membership, then normal price and no points
+			
+			System.out.println("The total price is "+temtotal+"$.");
+			System.out.println("Thanks for shopping! See you next time");
+		
+		}
+		
+		
+		grocery.close();
+	
+	}  
+
+
+}
